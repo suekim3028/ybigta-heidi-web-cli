@@ -6,8 +6,8 @@ export const userState = atom<UserTypes.User | null>({
   default: null,
 });
 
-export const hasSignedIn = selector({
-  key: "hasSignedInState",
+export const hasUserState = selector({
+  key: "hasUserState",
   get: ({ get }) => {
     const user = get(userState);
     return !!user;

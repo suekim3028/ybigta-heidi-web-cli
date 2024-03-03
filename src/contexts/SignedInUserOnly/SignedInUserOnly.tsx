@@ -19,7 +19,7 @@ const SignedInUserOnly = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (!user) {
-      router.replace("/");
+      router.replace("/login");
       notification.info({ message: "먼저 로그인 해주세요 :)" });
     }
   }, [!!user]);

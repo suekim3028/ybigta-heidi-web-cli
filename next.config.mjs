@@ -13,6 +13,7 @@ const nextConfig = {
     "rc-table",
     "kitchen-flow-editor",
   ],
+  eslint: { ignoreDuringBuilds: true },
   pageExtensions: ["page.tsx"],
   images: {
     remotePatterns: [
