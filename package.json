@@ -9,18 +9,19 @@
     "lint": "next lint && stylelint './src/**/*.ts'"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.18.4",
+    "antd": "^5.15.0",
     "axios": "^1.6.7",
     "next": "14.1.1",
     "react": "^18",
-    "react-dom": "^18",
-    "styled-components": "^6.1.8"
+    "react-device-detect": "^2.2.3",
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "babel-plugin-styled-components": "^2.1.4",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "14.1.1",
@@ -32,9 +33,6 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "postcss-styled-syntax": "^0.6.4",
-    "stylelint": "^16.2.1",
-    "stylelint-config-standard": "^36.0.0",
     "typescript": "^5.3.3"
   }
 }
