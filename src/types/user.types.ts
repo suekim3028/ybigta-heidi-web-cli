@@ -1,5 +1,8 @@
-type Gender = "F" | "M";
-type Strength = "GOOD" | "NORMAL" | "BAD";
+import { USER_CONSTS } from "@constants";
+
+export type Gender = (typeof USER_CONSTS.GENDER_LIST)[number];
+
+export type Strength = (typeof USER_CONSTS.STRENGTH_LIST)[number];
 
 export type SignUpUser = {
   id: string;
