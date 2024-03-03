@@ -1,13 +1,9 @@
-import { userApis } from "@apis";
 import { commonHooks, userHooks } from "@hooks";
 import { UserTypes } from "@types";
-import { commonUtils } from "@utils";
-import { Button, Form, Input, notification } from "antd";
-import React from "react";
+import { Button, Form, FormInstance, Input, notification } from "antd";
 
 export const Login = () => {
   const [form] = Form.useForm();
-  const { submittable } = commonHooks.useFormSubmittable(form);
   const { signIn } = userHooks.useAuth();
 
   const onFinish = (values: UserTypes.SignInUser) => {
@@ -50,11 +46,24 @@ export const Login = () => {
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit" disabled={!submittable}>
-          Submit
-        </Button>
+        <SubmitButton form={form} />
       </Form.Item>
     </Form>
+  );
+};
+
+const SubmitButton = ({ form }: { form: FormInstance }) => {
+  const { submittable } = commonHooks.useFormSubmittable(form);
+
+  return (
+    <Button
+      type="primary"
+      htmlType="submit"
+      disabled={!submittable}
+      size="large"
+    >
+      Submit
+    </Button>
   );
 };
 
