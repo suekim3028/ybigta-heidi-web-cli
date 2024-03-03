@@ -13,7 +13,7 @@ const dummySignUpUser: UserTypes.SignUpUser = {
   height: 185,
   weight: 30,
   name: "김수빈",
-  strength: "BAD",
+  strength: "WEAK",
 };
 
 export const signIn = async (
