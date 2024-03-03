@@ -1,17 +1,18 @@
 import { userApis } from "@apis";
-import { commonHooks } from "@hooks";
+import { commonHooks, userHooks } from "@hooks";
 import { UserTypes } from "@types";
 import { commonUtils } from "@utils";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, notification } from "antd";
 import React from "react";
 
 export const Login = () => {
   const [form] = Form.useForm();
   const { submittable } = commonHooks.useFormSubmittable(form);
+  const { signIn } = userHooks.useAuth();
 
   const onFinish = (values: UserTypes.SignInUser) => {
-    commonUtils.withErrorHandling(() => userApis.signIn(values), {
-      onSuccess: (res) => {},
+    signIn(values, (user) => {
+      notification.success({ message: `${user.name} 님, 안녕하세요!` });
     });
   };
 

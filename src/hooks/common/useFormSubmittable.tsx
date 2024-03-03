@@ -11,7 +11,6 @@ export const useFormSubmittable = (form: FormInstance) => {
     form
       .validateFields({ validateOnly: true })
       .then((val) => {
-        console.log({ val });
         setSubmittable(true);
       })
       .catch(() => setSubmittable(false));
