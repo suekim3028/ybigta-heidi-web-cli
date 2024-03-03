@@ -20,5 +20,18 @@ export const useAuth = () => {
     });
   };
 
-  return { signIn };
+  const signUp = (
+    data: UserTypes.SignUpUser,
+    onSuccess: (user: UserTypes.User) => void | Promise<void>
+  ) => {
+    commonUtils.withErrorHandling(() => userApis.signUp(data), {
+      onSuccess: ({ token, user }) => {
+        API.setHeaderToken(token);
+        setUser(user);
+        onSuccess(user);
+      },
+    });
+  };
+
+  return { signIn, signUp };
 };
