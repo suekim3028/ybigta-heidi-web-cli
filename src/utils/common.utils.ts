@@ -5,13 +5,18 @@ export const withErrorHandling = async <
   F extends (...args: any) => Promise<any>
 >(
   fn: F,
-  onApiError?: (error: {
-    userMessage?: string;
-    userTitle?: string;
-  }) => void | Promise<void>,
-  onSuccess?: (
-    data: F extends (...args: any) => Promise<infer R> ? R : never
-  ) => void | Promise<void>
+  {
+    onApiError,
+    onSuccess,
+  }: {
+    onApiError?: (error: {
+      userMessage?: string;
+      userTitle?: string;
+    }) => void | Promise<void>;
+    onSuccess?: (
+      data: F extends (...args: any) => Promise<infer R> ? R : never
+    ) => void | Promise<void>;
+  }
 ): Promise<void> => {
   try {
     const response = await fn();
