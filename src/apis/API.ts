@@ -7,6 +7,7 @@ import axios, {
   AxiosRequestHeaders,
 } from "axios";
 import ApiError from "./ApiError";
+import { TokenStorage } from "@storage";
 const qs = require("qs");
 
 class API implements APIInstance {
@@ -90,6 +91,7 @@ class API implements APIInstance {
 
   public setHeaderToken(token: string) {
     this.headers["X-Authorization"] = token;
+    TokenStorage.set({ token });
   }
 
   public getHeaderToken() {
