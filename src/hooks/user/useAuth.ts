@@ -1,6 +1,6 @@
 import { API, userApis } from "@apis";
 import { userState } from "@atoms/user.atoms";
-import { UserTypes, UtilTypes } from "@types";
+import { UserTypes } from "@types";
 import { commonUtils } from "@utils";
 import { useSetRecoilState } from "recoil";
 

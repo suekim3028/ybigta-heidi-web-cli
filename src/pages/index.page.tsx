@@ -1,10 +1,7 @@
-import { userState } from "@atoms/user.atoms";
-import { Login } from "@components";
 import { SignedInUserOnly } from "@contexts";
 import { Flex, Typography } from "antd";
 import { Inter } from "next/font/google";
 import Head from "next/head";
-import { useRecoilState } from "recoil";
 
 const inter = Inter({ subsets: ["latin"] });
 const HeadComponent = () => (
@@ -22,7 +19,6 @@ const Index = () => {
       <HeadComponent />
       <Flex vertical>
         <Typography.Title>Login</Typography.Title>
-        <Login />
       </Flex>
     </SignedInUserOnly>
   );

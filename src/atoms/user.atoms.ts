@@ -1,9 +1,11 @@
 import { UserTypes } from "@types";
+import { commonUtils } from "@utils";
 import { atom, selector } from "recoil";
 
 export const userState = atom<UserTypes.User | null>({
   key: "userState",
   default: null,
+  // effects_UNSTABLE: [commonUtils.getPersistAtom("userState")],
 });
 
 export const hasUserState = selector({

@@ -11,7 +11,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (hasUser) {
-      router.replace("");
+      router.replace("/");
     }
   }, [hasUser]);
 

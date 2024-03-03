@@ -1,5 +1,6 @@
 import ApiError, { isApiErrorObj } from "@apis/ApiError";
 import { notification } from "antd";
+import { recoilPersist } from "recoil-persist";
 
 export const withErrorHandling = async <
   F extends (...args: any) => Promise<any>
@@ -59,4 +60,15 @@ export const parseNum = (str: string) => {
   if (typeof parsed !== "number" || Number.isNaN(parsed)) return null;
 
   return parsed;
+};
+
+const sessionStorage =
+  typeof window !== "undefined" ? window.localStorage : undefined;
+
+export const getPersistAtom = (key: string) => {
+  const { persistAtom } = recoilPersist({
+    key,
+    storage: sessionStorage,
+  });
+  return persistAtom;
 };
