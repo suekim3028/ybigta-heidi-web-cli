@@ -1,78 +1,167 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, {
+  AxiosRequestConfig,
+  AxiosResponse,
+  AxiosInstance,
+  CreateAxiosDefaults,
+  InternalAxiosRequestConfig,
+  AxiosRequestHeaders,
+} from "axios";
 import ApiError from "./ApiError";
+const qs = require("qs");
 
-type CustomAxiosInstance = {
-  get<T>(url: string, config?: AxiosRequestConfig): Promise<T>;
-  delete<T>(url: string, config?: AxiosRequestConfig): Promise<T>;
-  post<T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<T>;
-  put<T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<T>;
-  patch<T>(
-    url: string,
-    data?: unknown,
-    config?: AxiosRequestConfig
-  ): Promise<T>;
-};
+class API implements APIInstance {
+  private headers: Record<string, any> = {};
+  private instance: AxiosInstance | null = null;
+  private useConsole = false;
 
-class API {
-  static axiosInstance: AxiosInstance = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-  });
-
-  private isResponseInitialized = false;
-
-  getAxiosInstance() {
-    return API.axiosInstance as CustomAxiosInstance;
-  }
-
-  //   stage, prod 에 따라서 분기
-  initialize() {
-    this.setRequestInterceptor();
-    this.setResponseInterceptor();
-  }
-
-  private setRequestInterceptor() {
-    const headers: Record<string, string | number> = {};
-
-    const authToken = ""; // TODO
-
-    if (authToken) {
-      headers.Authorization = `${authToken}`;
+  constructor() {
+    if (process?.env?.NODE_ENV === "development") {
+      this.useConsole = true;
     }
+  }
 
-    API.axiosInstance.interceptors.request.use((config) => {
-      for (const key in headers) {
-        config.headers.set(key, headers[key]);
+  private requestInterceptor(
+    config: InternalAxiosRequestConfig<any>
+  ): InternalAxiosRequestConfig<any> {
+    return {
+      ...config,
+      ...(this.useConsole ? { requestAt: new Date() } : {}),
+      headers: {
+        ...config.headers,
+        ...this.headers,
+      } as AxiosRequestHeaders,
+    };
+  }
+
+  private hasCustomConfig(
+    config: any
+  ): config is AxiosRequestConfig<any> & APICustomConfig {
+    return "requestAt" in config && config.requestAt instanceof Date;
+  }
+
+  private responseInterceptor = {
+    onFulfilled: <T>({ config, data, headers }: AxiosResponse<T>) => {
+      if (this.useConsole && this.hasCustomConfig(config)) {
+        const timeDiffInSec = (
+          (new Date().getTime() - config.requestAt.getTime()) /
+          1000
+        ).toFixed(2);
+
+        let logText = `[${config.method?.toUpperCase()}] ${config.url}`;
+
+        config.params && (logText += `\t${JSON.stringify(config.params)}`);
+
+        logText += `\t${timeDiffInSec}s`;
+
+        console.log(logText);
       }
 
-      return config;
-    });
-  }
+      return data;
+    },
+    onRejected: ({ response }: FailResponse) => {
+      return Promise.reject(
+        new ApiError({
+          userTitle: response?.data?.userTitle,
+          userMessage: response?.data?.userMessage || "오류가 발생 했습니다",
 
-  private setResponseInterceptor() {
-    if (!this.isResponseInitialized) {
-      this.isResponseInitialized = true;
-
-      const responseInterceptor = {
-        onFulfilled: (response: AxiosResponse) => {
-          return response.data;
-        },
-        onRejected: ({ response }: { response: AxiosResponse }) => {
-          return Promise.reject(
-            new ApiError({
-              errorTitle: response.data?.errorTitle || "오류가 발생하였습니다.",
-              errorMsg: response.data?.errorMsg || "다시 시도해주세요.",
-              code: response.data?.code || 0,
-            })
-          );
-        },
-      };
-
-      API.axiosInstance.interceptors.response.use(
-        responseInterceptor.onFulfilled,
-        responseInterceptor.onRejected
+          code: response?.data?.code ?? 0,
+        })
       );
-    }
+    },
+  };
+
+  public initInstance(config?: CreateAxiosDefaults) {
+    this.instance = axios.create({
+      ...config,
+      paramsSerializer: (p) => qs.stringify(p, { indices: false }),
+    });
+
+    this.instance.interceptors.request.use(this.requestInterceptor.bind(this));
+
+    this.instance.interceptors.response.use(
+      this.responseInterceptor.onFulfilled.bind(this),
+      this.responseInterceptor.onRejected.bind(this)
+    );
   }
+
+  public setHeaders(headers: Record<string, any>) {
+    this.headers = { ...this.headers, ...headers };
+  }
+
+  public setHeaderToken(token: string) {
+    this.headers["X-Authorization"] = token;
+  }
+
+  public getHeaderToken() {
+    return this.headers["X-Authorization"] || null;
+  }
+
+  public removeHeaderToken() {
+    delete this.headers["X-Authorization"];
+  }
+
+  public setVersion(version: string) {
+    this.headers["App-Version"] = version;
+  }
+
+  public get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    if (!this.instance) throw new Error("init instance before use");
+    return this.instance.get(url, config);
+  }
+
+  public delete<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    if (!this.instance) throw new Error("init instance before use");
+    return this.instance.delete(url, config);
+  }
+
+  public post<T>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
+    if (!this.instance) throw new Error("init instance before use");
+    return this.instance.post(url, data, config);
+  }
+
+  public put<T>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
+    if (!this.instance) throw new Error("init instance before use");
+    return this.instance.put(url, data, config);
+  }
+
+  public patch<T>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
+    if (!this.instance) throw new Error("init instance before use");
+    return this.instance.patch(url, data, config);
+  }
+}
+
+type FailResponse = {
+  message?: string;
+  response: AxiosResponse;
+  config: AxiosRequestConfig;
+};
+
+type APICustomConfig = {
+  requestAt: Date;
+};
+
+export interface APIInstance {
+  get<T>(url: string, config?: AxiosRequestConfig): Promise<T>;
+
+  delete<T>(url: string, config?: AxiosRequestConfig): Promise<T>;
+
+  post<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T>;
+
+  put<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T>;
+
+  patch<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T>;
 }
 
 export default new API();

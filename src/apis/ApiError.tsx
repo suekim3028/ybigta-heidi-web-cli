@@ -10,7 +10,7 @@ export default class ApiError extends Error {
 }
 
 type ErrorObj = {
-  errorData: Pick<ApiErrorData, "errorMsg" | "errorTitle">;
+  errorData: Pick<ApiErrorData, "userMessage" | "userTitle">;
 };
 
 export const isApiErrorObj = (error: unknown): error is ErrorObj => {
@@ -24,9 +24,12 @@ export const isApiErrorObj = (error: unknown): error is ErrorObj => {
     typeof error.errorData.code === "number"
   ) {
     const errorData = error.errorData;
-    if ("errorMsg" in errorData && typeof errorData.errorMsg === "string") {
-      if ("errorTitle" in errorData) {
-        return typeof errorData.errorTitle === "string";
+    if (
+      "userMessage" in errorData &&
+      typeof errorData.userMessage === "string"
+    ) {
+      if ("userTitle" in errorData) {
+        return typeof errorData.userTitle === "string";
       }
       return true;
     }
@@ -38,6 +41,6 @@ export const isApiErrorObj = (error: unknown): error is ErrorObj => {
 
 export type ApiErrorData = {
   code: number;
-  errorMsg: string;
-  errorTitle?: string;
+  userMessage: string;
+  userTitle?: string;
 };

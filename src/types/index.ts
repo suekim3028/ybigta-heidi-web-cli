@@ -1,4 +1,6 @@
-import * as ApiType from "./api.types";
-import * as UtilType from "./util.types";
-import * as UserType from "./user.types";
-export { ApiType, UtilType, UserType };
+import * as ApiTypes from "./api.types";
+import * as UtilTypes from "./util.types";
+import * as UserTypes from "./user.types";
+import * as CommonTypes from "./common.types";
+
+export { ApiTypes, UtilTypes, UserTypes, CommonTypes };

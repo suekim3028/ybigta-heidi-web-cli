@@ -1,6 +1,4 @@
 import ApiError, { isApiErrorObj } from "@apis/ApiError";
-
-import { UtilType } from "@types";
 import { notification } from "antd";
 
 export const withErrorHandling = async <
@@ -8,8 +6,8 @@ export const withErrorHandling = async <
 >(
   fn: F,
   onApiError?: (error: {
-    errorMsg?: string;
-    errorTitle?: string;
+    userMessage?: string;
+    userTitle?: string;
   }) => void | Promise<void>,
   onSuccess?: (
     data: F extends (...args: any) => Promise<infer R> ? R : never
@@ -21,9 +19,9 @@ export const withErrorHandling = async <
   } catch (error) {
     if (error instanceof ApiError && !!onApiError) {
       const {
-        errorData: { errorMsg, errorTitle },
+        errorData: { userMessage, userTitle },
       } = error;
-      onApiError({ errorMsg, errorTitle });
+      onApiError({ userMessage, userTitle });
     } else {
       throw error;
     }
@@ -33,8 +31,8 @@ export const withErrorHandling = async <
 export const handleUnknownError = (error: unknown) => {
   if (isApiErrorObj(error)) {
     notification.error({
-      message: error.errorData.errorTitle,
-      description: error.errorData.errorMsg || "",
+      message: error.errorData.userTitle,
+      description: error.errorData.userMessage || "",
     });
   } else {
     notification.error({

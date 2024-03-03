@@ -1,5 +1,7 @@
+import { userApis } from "@apis";
 import { commonHooks } from "@hooks";
-import { UserType } from "@types";
+import { UserTypes } from "@types";
+import { commonUtils } from "@utils";
 import { Button, Form, Input } from "antd";
 import React from "react";
 
@@ -7,11 +9,10 @@ export const Login = () => {
   const [form] = Form.useForm();
   const { submittable } = commonHooks.useFormSubmittable(form);
 
-  const onFinish = (values: UserType.SignInUser) => {
-    console.log("Success:", values);
+  const onFinish = (values: UserTypes.SignInUser) => {
+    userApis.signIn(values);
   };
 
-  console.log({ submittable });
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
@@ -29,7 +30,7 @@ export const Login = () => {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
-      <Form.Item<UserType.SignInUser>
+      <Form.Item<UserTypes.SignInUser>
         label="아이디"
         name="id"
         rules={[{ required: true, message: "아이디를 입력해주세요." }]}
@@ -37,7 +38,7 @@ export const Login = () => {
         <Input />
       </Form.Item>
 
-      <Form.Item<UserType.SignInUser>
+      <Form.Item<UserTypes.SignInUser>
         label="비밀번호"
         name="password"
         rules={[{ required: true, message: "비밀번호를 입력해주세요." }]}
