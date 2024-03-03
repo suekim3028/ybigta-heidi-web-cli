@@ -59,10 +59,8 @@ class API {
         onRejected: ({ response }: { response: AxiosResponse }) => {
           return Promise.reject(
             new ApiError({
-              userTitle: response.data?.userTitle || "오류 발생",
-              userMessage:
-                response.data?.userMessage ||
-                "오류가 발생하였습니다. 다시 시도해주세요.",
+              errorTitle: response.data?.errorTitle || "오류가 발생하였습니다.",
+              errorMsg: response.data?.errorMsg || "다시 시도해주세요.",
               code: response.data?.code || 0,
             })
           );
