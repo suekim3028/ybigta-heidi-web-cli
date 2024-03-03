@@ -6,6 +6,11 @@ const theme: ThemeConfig = {
     fontSize: 16,
     colorPrimary: "#537A5A",
   },
+  components: {
+    Form: {
+      marginLG: 25,
+    },
+  },
 };
 
 export default theme;

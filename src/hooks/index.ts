@@ -1,1 +1,3 @@
-export * from "./useWindowSizeChange";
+import * as commonHooks from "./common";
+
+export { commonHooks };

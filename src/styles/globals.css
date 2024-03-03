@@ -213,9 +213,7 @@ body {
   box-sizing: border-box;
   font-family: Pretendard !important;
   letter-spacing: -0.5px;
-  font-feature-settings:
-    "pnum" on,
-    "lnum" on;
+  font-feature-settings: "pnum" on, "lnum" on;
   line-height: 30%;
   -webkit-tap-highlight-color: transparent;
   padding: 0;

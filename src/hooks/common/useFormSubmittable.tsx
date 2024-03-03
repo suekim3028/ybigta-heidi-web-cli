@@ -1,7 +1,7 @@
 import { Form, FormInstance } from "antd";
 import { useEffect, useState } from "react";
 
-export const useFormSubmittable = ({ form }: { form: FormInstance }) => {
+export const useFormSubmittable = (form: FormInstance) => {
   const [submittable, setSubmittable] = useState<boolean>(false);
 
   // Watch all values
@@ -10,7 +10,10 @@ export const useFormSubmittable = ({ form }: { form: FormInstance }) => {
   useEffect(() => {
     form
       .validateFields({ validateOnly: true })
-      .then(() => setSubmittable(true))
+      .then((val) => {
+        console.log({ val });
+        setSubmittable(true);
+      })
       .catch(() => setSubmittable(false));
   }, [form, values]);
 

@@ -1,8 +1,7 @@
-import Head from "next/head";
-import Image from "next/image";
+import { Login } from "@components";
+import { Flex, Typography } from "antd";
 import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
-import { Button, Checkbox, Flex, Form, Input, Layout, Typography } from "antd";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 const HeadComponent = () => (
@@ -20,6 +19,7 @@ export default function Home() {
       <HeadComponent />
       <Flex vertical>
         <Typography.Title>Login</Typography.Title>
+        <Login />
       </Flex>
     </>
   );
