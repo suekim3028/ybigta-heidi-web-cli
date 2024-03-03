@@ -1,12 +1,15 @@
-import React from "react";
+import theme from "@styles/themeConfig";
 import { ConfigProvider } from "antd";
 import type { AppProps } from "next/app";
-import theme from "@styles/themeConfig";
+
+import { RecoilRoot } from "recoil";
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <ConfigProvider theme={theme}>
-    <Component {...pageProps} />
-  </ConfigProvider>
+  <RecoilRoot>
+    <ConfigProvider theme={theme}>
+      <Component {...pageProps} />
+    </ConfigProvider>
+  </RecoilRoot>
 );
 
 export default App;

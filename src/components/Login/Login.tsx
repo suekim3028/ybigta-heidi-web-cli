@@ -10,7 +10,9 @@ export const Login = () => {
   const { submittable } = commonHooks.useFormSubmittable(form);
 
   const onFinish = (values: UserTypes.SignInUser) => {
-    userApis.signIn(values);
+    commonUtils.withErrorHandling(() => userApis.signIn(values), {
+      onSuccess: (res) => {},
+    });
   };
 
   const onFinishFailed = (errorInfo: any) => {
