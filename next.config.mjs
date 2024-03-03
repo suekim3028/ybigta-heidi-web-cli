@@ -13,6 +13,7 @@ const nextConfig = {
     "rc-table",
     "kitchen-flow-editor",
   ],
+  pageExtensions: ["page.tsx"],
   images: {
     remotePatterns: [
       // TODO: TEST

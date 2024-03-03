@@ -11,12 +11,12 @@
   },
   "plugins": ["react", "import"],
   "rules": {
-    "@typescript-eslint/consistent-type-definitions": "off",
-    "react-hooks/exhaustive-deps": [
-      "warn",
-      {
-        "additionalHooks": "(useRecoilCallback|useRecoilTransaction_UNSTABLE)"
-      }
-    ]
+    "@typescript-eslint/consistent-type-definitions": "off"
+    // "react-hooks/exhaustive-deps": [
+    //   "warn",
+    //   {
+    //     "additionalHooks": "(useRecoilCallback|useRecoilTransaction_UNSTABLE)"
+    //   }
+    // ]
   }
 }
