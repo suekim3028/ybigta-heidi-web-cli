@@ -92,7 +92,14 @@ const MenuList = () => {
                 justifyContent: "center",
               }}
             >
-              <Card size="small" style={{ overflow: "hidden" }}>
+              <Card
+                size="small"
+                style={{
+                  overflow: "hidden",
+                  boxShadow: "0px 0px 20px rgba(0,0,0,0.1)",
+                }}
+                bordered={false}
+              >
                 <div
                   style={{
                     position: "absolute",
