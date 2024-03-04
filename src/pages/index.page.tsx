@@ -1,8 +1,9 @@
 import { SignedInUserOnly } from "@contexts";
-import { Flex, Typography } from "antd";
+import { Carousel, Flex, Typography } from "antd";
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import UserProfile from "./index/components/UserProfile/UserProfile";
+import BannerCarousel from "./index/components/BannerCarousel/BannerCarousel";
 
 const inter = Inter({ subsets: ["latin"] });
 const HeadComponent = () => (
@@ -20,6 +21,7 @@ const Index = () => {
       <HeadComponent />
       <Flex vertical>
         <UserProfile />
+        <BannerCarousel />
       </Flex>
     </SignedInUserOnly>
   );
