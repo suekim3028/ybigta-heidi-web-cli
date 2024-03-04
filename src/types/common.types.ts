@@ -6,3 +6,9 @@ export type Banner = {
   imageUrl: string;
   link: string;
 };
+
+export type Menu = {
+  logoUrl: string;
+  id: string;
+  name: string;
+};

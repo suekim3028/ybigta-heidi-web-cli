@@ -6,6 +6,7 @@ import {
   Card,
   Col,
   Flex,
+  Row,
   Statistic,
   Tag,
   Typography,
@@ -19,8 +20,8 @@ const UserProfile = () => {
   } = useSignedInUserOnly();
 
   return (
-    <Flex vertical align="flex-start" gap={20}>
-      <Flex gap={12} align={"center"}>
+    <Flex vertical align="flex-start" gap={20} style={{ padding: "30px 0px" }}>
+      <Flex gap={12} align={"center"} style={{ paddingLeft: "3%" }}>
         <Avatar
           style={{
             backgroundColor: STYLE_CONSTS.PRIMARY_COLOR,
@@ -32,39 +33,36 @@ const UserProfile = () => {
           {name[0]}
         </Avatar>
         <Flex vertical gap={4}>
-          <Typography.Text>{name} 님, 반가워요!</Typography.Text>
-          <Button size={"middle"}>개인정보 수정</Button>
+          <Row>
+            <Typography.Text strong>{name} </Typography.Text>
+            <Text style={{ whiteSpace: "break-spaces" }}>
+              {" 님, 반가워요!"}
+            </Text>
+          </Row>
+          <Button size={"middle"} type={"default"}>
+            개인정보 수정
+          </Button>
         </Flex>
       </Flex>
       <Flex
-        vertical
         style={{
-          backgroundColor: "rgba(0,0,0,0.1)",
-          padding: 20,
-          borderRadius: 20,
+          width: "100%",
+          maxWidth: 450,
         }}
-        gap={20}
       >
-        <Flex flex={1} gap={12}>
+        <Flex vertical align="center" gap={8} style={{ padding: "0px 20px" }}>
           <Text strong>건강 레벨</Text>
           <Tag color={"magenta"}>level. 4</Tag>
         </Flex>
-        <Flex flex={1} gap={28}>
-          <Col span={100}>
-            <Card bordered={false}>
-              <Statistic
-                title="누적한 건강 효과"
-                value={1123}
-                suffix={"kcal"}
-              />
-            </Card>
-          </Col>
-
-          <Col span={100}>
-            <Card bordered={false}>
-              <Statistic title="누적 경제적 효과" value={324} suffix={"만원"} />
-            </Card>
-          </Col>
+        <Flex justify="center" align="center" flex={1}>
+          <Flex vertical align="center" flex={1}>
+            <Text type={"secondary"}>누적 건강 효과</Text>
+            <Text strong>{(234).toLocaleString()} kcal</Text>
+          </Flex>
+          <Flex vertical align="center" flex={1}>
+            <Text type={"secondary"}>누적 경제적 효과</Text>
+            <Text strong>{(234).toLocaleString()} 만원</Text>
+          </Flex>
         </Flex>
       </Flex>
     </Flex>

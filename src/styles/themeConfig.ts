@@ -7,6 +7,7 @@ const theme: ThemeConfig = {
     fontSize: 16,
     colorPrimary: STYLE_CONSTS.PRIMARY_COLOR,
   },
+
   components: {
     Form: {
       marginLG: 25,

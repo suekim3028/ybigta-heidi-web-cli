@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Head from "next/head";
 import UserProfile from "./index/components/UserProfile/UserProfile";
 import BannerCarousel from "./index/components/BannerCarousel/BannerCarousel";
+import MenuList from "./index/components/MenuList/MenuList";
 
 const inter = Inter({ subsets: ["latin"] });
 const HeadComponent = () => (
@@ -30,6 +31,7 @@ const Index = () => {
             나의 쿠폰함
           </Button>
         </Flex>
+        <MenuList />
       </Flex>
     </SignedInUserOnly>
   );
