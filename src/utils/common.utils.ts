@@ -118,3 +118,9 @@ export const groupBy = <T, V>(
 
   return grouped;
 };
+
+export const getRandomItemFromArr = (arr: any[]) => {
+  const len = arr.length;
+  const idx = Math.floor(Math.random() * len);
+  return arr[idx];
+};
