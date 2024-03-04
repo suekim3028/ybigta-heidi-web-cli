@@ -1,10 +1,11 @@
 // theme/themeConfig.ts
+import { STYLE_CONSTS } from "@constants";
 import type { ThemeConfig } from "antd";
 
 const theme: ThemeConfig = {
   token: {
     fontSize: 16,
-    colorPrimary: "#537A5A",
+    colorPrimary: STYLE_CONSTS.PRIMARY_COLOR,
   },
   components: {
     Form: {
