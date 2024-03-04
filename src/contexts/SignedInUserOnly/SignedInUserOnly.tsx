@@ -1,4 +1,5 @@
 import { userState } from "@atoms/user.atoms";
+import { commonHooks } from "@hooks";
 import { UserTypes } from "@types";
 import { notification } from "antd";
 import { useRouter } from "next/router";
@@ -14,16 +15,25 @@ const SignInUserOnlyContext = createContext<SignedInUserOnlyContextValue>({
 });
 
 const SignedInUserOnly = ({ children }: { children: React.ReactNode }) => {
-  const user = useRecoilValue(userState);
+  const state = commonHooks.useSsrRecoilState(userState);
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) {
-      router.replace("/login");
-      notification.info({ message: "먼저 로그인 해주세요 :)" });
-    }
-  }, [!!user]);
+    if (state.initialized) {
+      const [user] = state.state;
 
+      if (!user) {
+        router.replace("/login");
+        notification.info({ message: "먼저 로그인 해주세요 :)" });
+      }
+    }
+  }, [state]);
+
+  if (!state.initialized) {
+    return <></>;
+  }
+
+  const [user] = state.state;
   if (!user) return <></>;
 
   return (

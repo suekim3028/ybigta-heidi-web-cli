@@ -62,17 +62,6 @@ export const parseNum = (str: string) => {
   return parsed;
 };
 
-const sessionStorage =
-  typeof window !== "undefined" ? window.localStorage : undefined;
-
-export const getPersistAtom = (key: string) => {
-  const { persistAtom } = recoilPersist({
-    key,
-    storage: sessionStorage,
-  });
-  return persistAtom;
-};
-
 /**
  * 특정 key로 Object[]를 groupBy 하는 함수
  */

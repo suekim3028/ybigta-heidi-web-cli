@@ -1,11 +1,13 @@
 import { UserTypes } from "@types";
 import { commonUtils } from "@utils";
 import { atom, selector } from "recoil";
+import { recoilPersist } from "recoil-persist";
 
+const { persistAtom } = recoilPersist();
 export const userState = atom<UserTypes.User | null>({
   key: "userState",
   default: null,
-  // effects_UNSTABLE: [commonUtils.getPersistAtom("userState")],
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const hasUserState = selector({

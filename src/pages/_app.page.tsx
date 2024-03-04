@@ -10,15 +10,17 @@ const queryClient = new QueryClient();
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <ConfigProvider theme={theme}>
-          <WebViewWrapper>
-            <Component {...pageProps} />
-          </WebViewWrapper>
-        </ConfigProvider>
-      </RecoilRoot>
-    </QueryClientProvider>
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <RecoilRoot>
+          <ConfigProvider theme={theme}>
+            <WebViewWrapper>
+              <Component {...pageProps} />
+            </WebViewWrapper>
+          </ConfigProvider>
+        </RecoilRoot>
+      </QueryClientProvider>
+    </React.StrictMode>
   );
 };
 
