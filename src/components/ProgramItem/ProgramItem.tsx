@@ -1,6 +1,7 @@
 import { ProgramTypes } from "@types";
 import { Button, Flex, Image, Rate, Tag, Typography } from "antd";
 import { DoubleRightOutlined, StarOutlined } from "@ant-design/icons";
+import { PROGRAM_CONTS } from "@constants";
 const { Text } = Typography;
 
 const ProgramItem = ({
@@ -15,24 +16,24 @@ const ProgramItem = ({
         <Image
           src={thumbnailUrl}
           preview={false}
-          width={50}
-          height={50}
+          width={60}
+          height={60}
           style={{ borderRadius: 10 }}
         />
         <Flex vertical align={"flex-start"} gap={2}>
-          <Tag style={{ fontSize: 12, padding: "0px 4px" }}>{category}</Tag>
+          <Tag
+            color={PROGRAM_CONTS.CATEGORY_TAG_COLOR[category]}
+            style={{ fontSize: 12, padding: "0px 4px" }}
+            bordered={false}
+          >
+            {category}
+          </Tag>
           <Text style={{ fontSize: 16 }} strong>
             {name}
           </Text>
         </Flex>
       </Flex>
-      <Flex
-        style={{ color: "orange" }}
-        gap={2}
-        align="center"
-
-        // flex={1}
-      >
+      <Flex style={{ color: "orange" }} gap={2} align="center">
         <StarOutlined size={10} />
         <Text style={{ color: "orange", fontSize: 14 }}>{rate.toFixed(1)}</Text>
       </Flex>
