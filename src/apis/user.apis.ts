@@ -24,7 +24,7 @@ export const signIn = async (
     user: dummySignUpUser,
   };
 };
-
+ 
 export const signUp = async (
   data: UserTypes.SignUpUser
 ): Promise<SignInResponse> => {

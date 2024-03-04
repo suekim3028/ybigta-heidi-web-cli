@@ -1,5 +1,5 @@
 import { SignedInUserOnly } from "@contexts";
-import { Carousel, Flex, Typography } from "antd";
+import { Button, Card, Carousel, Flex, Typography } from "antd";
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import UserProfile from "./index/components/UserProfile/UserProfile";
@@ -22,6 +22,14 @@ const Index = () => {
       <Flex vertical>
         <UserProfile />
         <BannerCarousel />
+        <Flex style={{ paddingTop: 20 }} gap={12}>
+          <Button size={"large"} style={{ width: "45%", height: 100 }}>
+            예약 내역
+          </Button>
+          <Button size={"large"} style={{ width: "45%", height: 100 }}>
+            나의 쿠폰함
+          </Button>
+        </Flex>
       </Flex>
     </SignedInUserOnly>
   );

@@ -14,3 +14,7 @@ type RequiredAndNotNull<T> = {
 
 export type RemoveNullValues<T> = RequiredAndNotNull<Pick<T, keyof T>> &
   Omit<T, keyof T>;
+
+export type KeysMatching<T, V> = {
+  [K in keyof T]: T[K] extends V ? K : never;
+}[keyof T];

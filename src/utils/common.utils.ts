@@ -72,3 +72,49 @@ export const getPersistAtom = (key: string) => {
   });
   return persistAtom;
 };
+
+/**
+ * 특정 key로 Object[]를 groupBy 하는 함수
+ */
+export const groupBy = <T, V>(
+  data: T[],
+  by: (item: T) => V,
+  groupsAreEqual?: (a: V, b: V) => boolean
+) => {
+  const groupList: V[] = [];
+
+  const grouped = data.reduce(
+    (prev, curr) => {
+      const group = by(curr);
+      const idx = groupList.findIndex((g) =>
+        groupsAreEqual ? groupsAreEqual(g, group) : g === group
+      );
+
+      if (idx === undefined || !prev[idx]?.dataList) {
+        groupList.push(group);
+        return [
+          ...prev,
+          {
+            group,
+            dataList: [curr],
+          },
+        ];
+      } else {
+        return [
+          ...prev.slice(0, idx),
+          {
+            ...prev[idx],
+            dataList: [...prev[idx].dataList, curr],
+          },
+          ...prev.slice(idx + 1),
+        ];
+      }
+    },
+    [] as {
+      group: V;
+      dataList: T[];
+    }[]
+  );
+
+  return grouped;
+};
