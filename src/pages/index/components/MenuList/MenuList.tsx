@@ -39,48 +39,50 @@ const MenuList = () => {
       id: "map",
       logoUrl:
         "https://cdn-icons-png.freepik.com/512/2006/2006586.png?ga=GA1.1.1044121950.1708461851&",
-      name: "전국 스탬프 투어 맵",
+      name: "전국 스탬프\n투어 맵",
     },
   ];
 
   return (
-    <Flex vertical align="center" flex={1} style={{ padding: "20px 0px" }}>
+    <Flex vertical align="center" flex={1}>
       <Flex
         vertical
         align={"stretch"}
         style={{ maxWidth: 600, width: "100%" }}
         gap={20}
       >
-        <Row justify={"space-around"} style={{ width: "100%" }}>
+        <Row justify={"center"} style={{ width: "100%" }} gutter={12}>
           {menus.map(({ logoUrl, name }) => (
             <Col>
-              <Flex
-                style={{
-                  width: 60,
-                  height: 60,
-
-                  backgroundColor: "rgba(0,0,0,0.1)",
-                  border: "1px solid gray",
-                  borderRadius: 20,
-                }}
-                align="center"
-                justify="center"
-              >
-                <Image width={"90%"} src={logoUrl} />
+              <Flex vertical gap={8}>
+                <Flex
+                  style={{
+                    width: 60,
+                    height: 60,
+                    backgroundColor: "rgba(0,0,0,0.04)",
+                    borderRadius: 10,
+                  }}
+                  align="center"
+                  justify="center"
+                >
+                  <Image width={40} src={logoUrl} preview={false} />
+                </Flex>
+                <Text
+                  strong
+                  style={{
+                    fontSize: 12,
+                    textAlign: "center",
+                    lineHeight: 1.1,
+                    whiteSpace: "pre-line",
+                  }}
+                >
+                  {name}
+                </Text>
               </Flex>
-              <Text
-                style={{
-                  textAlign: "center",
-                  fontWeight: 500,
-                  whiteSpace: "pre-line",
-                }}
-              >
-                {name}
-              </Text>
             </Col>
           ))}
         </Row>
-        <Row justify={"space-around"}>
+        <Row justify={"center"} gutter={10}>
           {bigMenus.map(({ logoUrl, name }) => (
             <Col
               span={10}
@@ -90,17 +92,43 @@ const MenuList = () => {
                 justifyContent: "center",
               }}
             >
-              <Card>
-                <Image width={50} src={logoUrl} />
-                <Text
+              <Card size="small" style={{ overflow: "hidden" }}>
+                <div
                   style={{
-                    textAlign: "center",
-                    fontWeight: 500,
-                    wordBreak: "break-all",
+                    position: "absolute",
+                    zIndex: 0,
+                    opacity: 0.5,
+                    left: -10,
+                    top: 10,
+                    height: "100%",
+                    width: "50%",
                   }}
                 >
-                  {name}
-                </Text>
+                  <Image
+                    preview={false}
+                    height={"100%"}
+                    style={{ objectFit: "contain" }}
+                    src={logoUrl}
+                  />
+                </div>
+                <Flex
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                  }}
+                  justify="flex-end"
+                >
+                  <Text
+                    style={{
+                      lineHeight: 1.2,
+                      textAlign: "right",
+                      fontWeight: 600,
+                      whiteSpace: "pre-line",
+                    }}
+                  >
+                    {name}
+                  </Text>
+                </Flex>
               </Card>
             </Col>
           ))}

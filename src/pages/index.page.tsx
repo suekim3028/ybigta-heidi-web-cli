@@ -1,10 +1,18 @@
 import { SignedInUserOnly } from "@contexts";
-import { Button, Card, Carousel, Flex, Typography } from "antd";
+
+import {
+  Button,
+  Card,
+  Carousel,
+  Flex,
+  Tabs,
+  TabsProps,
+  Typography,
+} from "antd";
 import { Inter } from "next/font/google";
 import Head from "next/head";
-import UserProfile from "./index/components/UserProfile/UserProfile";
-import BannerCarousel from "./index/components/BannerCarousel/BannerCarousel";
 import MenuList from "./index/components/MenuList/MenuList";
+import { BannerCarousel } from "@components";
 
 const inter = Inter({ subsets: ["latin"] });
 const HeadComponent = () => (
@@ -16,23 +24,44 @@ const HeadComponent = () => (
   </Head>
 );
 
+const TabComponent = () => {
+  return (
+    <Flex vertical>
+      <BannerCarousel />
+      <MenuList />
+    </Flex>
+  );
+};
+
+const items: TabsProps["items"] = [
+  {
+    key: "1",
+    label: "숙소",
+    children: "Content of Tab Pane 1",
+  },
+  {
+    key: "2",
+    label: "추천",
+    children: <TabComponent />,
+  },
+  {
+    key: "3",
+    label: "투어",
+    children: "Content of Tab Pane 3",
+  },
+];
+
 const Index = () => {
   return (
     <SignedInUserOnly>
       <HeadComponent />
-      <Flex vertical>
-        <UserProfile />
-        <BannerCarousel />
-        <Flex style={{ paddingTop: 20 }} gap={12}>
-          <Button size={"large"} style={{ width: "45%", height: 100 }}>
-            예약 내역
-          </Button>
-          <Button size={"large"} style={{ width: "45%", height: 100 }}>
-            나의 쿠폰함
-          </Button>
-        </Flex>
-        <MenuList />
-      </Flex>
+      <Tabs
+        defaultActiveKey="2"
+        items={items}
+        size="large"
+        style={{ display: "flex" }}
+        tabBarStyle={{ padding: "0px 20px" }}
+      />
     </SignedInUserOnly>
   );
 };

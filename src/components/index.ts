@@ -1,3 +1,3 @@
-// import Login from "../pages/login/components/Login/Login";
-
-// export { Login };
+import BannerCarousel from "./BannerCarousel/BannerCarousel";
+import Banner from "./Banner/Banner";
+export { BannerCarousel, Banner };

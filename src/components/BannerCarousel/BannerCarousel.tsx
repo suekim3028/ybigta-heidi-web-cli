@@ -1,7 +1,6 @@
-import { Carousel, Image } from "antd";
+import { Carousel } from "antd";
 
-import dummyBanner1 from "@public/images/dummy_banner.jpeg";
-import dummyBanner2 from "@public/images/dummy_banner_2.jpeg";
+import Banner from "@components/Banner/Banner";
 import { CommonTypes } from "@types";
 
 const BannerCarousel = () => {
@@ -12,19 +11,11 @@ const BannerCarousel = () => {
   }));
 
   return (
-    <Carousel autoplay={false}>
+    <Carousel autoplay={false} style={{ height: "calc(100vw*0.4)" }}>
       {banners.map((banner) => (
         <Banner {...banner} />
       ))}
     </Carousel>
-  );
-};
-
-const Banner = ({ imageUrl, link }: CommonTypes.Banner) => {
-  return (
-    <div style={{ width: "100%", height: 200 }}>
-      <Image src={imageUrl} style={{ objectFit: "cover" }} />
-    </div>
   );
 };
 
