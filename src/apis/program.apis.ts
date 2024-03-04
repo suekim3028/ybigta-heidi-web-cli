@@ -40,5 +40,8 @@ const dummyPrograms: ProgramTypes.Item[] = Array.from(
 );
 
 export const getPrograms = async () => {
+  await new Promise((resolve: (value: null) => void) => {
+    setTimeout(resolve, 2000);
+  });
   return dummyPrograms;
 };

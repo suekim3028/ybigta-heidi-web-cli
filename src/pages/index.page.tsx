@@ -13,6 +13,7 @@ import { Inter } from "next/font/google";
 import Head from "next/head";
 import MenuList from "./index/components/MenuList/MenuList";
 import { BannerCarousel } from "@components";
+import ProgramList from "@components/ProgramList/ProgramList";
 
 const inter = Inter({ subsets: ["latin"] });
 const HeadComponent = () => (
@@ -29,6 +30,7 @@ const TabComponent = () => {
     <Flex vertical>
       <BannerCarousel />
       <MenuList />
+      <ProgramList />
     </Flex>
   );
 };
