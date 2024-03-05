@@ -9,7 +9,7 @@ const ProgramItem = ({
   rate,
   thumbnailUrl,
   category,
-}: ProgramTypes.Item) => {
+}: ProgramTypes.Mini) => {
   return (
     <Flex justify="space-between" style={{ padding: 10 }} align="center">
       <Flex align={"center"} gap={12}>
