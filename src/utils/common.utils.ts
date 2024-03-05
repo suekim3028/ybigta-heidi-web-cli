@@ -55,7 +55,9 @@ export const handleUnknownError = (error: unknown) => {
 export const parseNum = (str: string) => {
   if (str === "") return null;
 
-  const parsed = Number(str.replace(/[^0-9+.]/g, ""));
+  const replaced = str.replace(/[^0-9+.]/g, "");
+  if (!replaced) return null;
+  const parsed = Number(replaced);
 
   if (typeof parsed !== "number" || Number.isNaN(parsed)) return null;
 
