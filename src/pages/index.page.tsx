@@ -12,8 +12,7 @@ import {
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import MenuList from "./index/components/MenuList/MenuList";
-import { BannerCarousel } from "@components";
-import ProgramList from "@components/ProgramList/ProgramList";
+import { BannerCarousel, ProgramList } from "@components";
 
 const inter = Inter({ subsets: ["latin"] });
 const HeadComponent = () => (

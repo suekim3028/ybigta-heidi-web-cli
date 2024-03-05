@@ -8,7 +8,9 @@ export type Banner = {
 };
 
 export type Menu = {
-  logoUrl: string;
+  logoUrl?: string;
   id: string;
-  name: string;
+  title: string;
+  path?: string;
+  link?: string;
 };

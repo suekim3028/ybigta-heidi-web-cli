@@ -1,11 +1,12 @@
 import ProgramItem from "@components/ProgramItem/ProgramItem";
 import usePrograms from "@queries/usePrograms";
-import { Col, Divider, Empty, Flex, Space } from "antd";
+import { Col, Divider, Empty, Flex, Progress, Space, Spin } from "antd";
 
 const ProgramList = () => {
   const { data, isLoading } = usePrograms();
 
-  if (!data) return <Empty />;
+  if (!data)
+    return isLoading ? <Spin style={{ margin: "60px 0px" }} /> : <Empty />;
   return (
     <Flex vertical style={{ padding: "20px 12px" }}>
       <Space
@@ -21,6 +22,7 @@ const ProgramList = () => {
         }
         // size={0}
       >
+        ㄴ
         {data.map((program) => (
           <ProgramItem {...program} key={program.id} />
         ))}

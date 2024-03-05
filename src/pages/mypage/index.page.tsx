@@ -3,7 +3,8 @@ import { Button, Card, Carousel, Flex, Typography } from "antd";
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import UserProfile from "./components/UserProfile/UserProfile";
-import { BannerCarousel } from "@components";
+import { BannerCarousel, BigMenuButton } from "@components";
+import { CommonTypes } from "@types";
 
 const inter = Inter({ subsets: ["latin"] });
 const HeadComponent = () => (
@@ -15,6 +16,17 @@ const HeadComponent = () => (
   </Head>
 );
 
+const menus: CommonTypes.Menu[] = [
+  {
+    id: "bookings",
+    title: "예약 내역",
+  },
+  {
+    id: "coupons",
+    title: "나의 쿠폰함",
+  },
+];
+
 const Index = () => {
   return (
     <SignedInUserOnly>
@@ -23,12 +35,11 @@ const Index = () => {
         <UserProfile />
         <BannerCarousel />
         <Flex style={{ paddingTop: 20 }} gap={12}>
-          <Button size={"large"} style={{ width: "45%", height: 100 }}>
-            예약 내역
-          </Button>
-          <Button size={"large"} style={{ width: "45%", height: 100 }}>
-            나의 쿠폰함
-          </Button>
+          {menus.map((menu) => (
+            <Flex flex={1} align={"stretch"}>
+              <BigMenuButton {...menu} size={"default"} />
+            </Flex>
+          ))}
         </Flex>
       </Flex>
     </SignedInUserOnly>
