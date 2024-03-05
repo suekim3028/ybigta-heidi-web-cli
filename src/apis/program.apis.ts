@@ -46,6 +46,7 @@ const dummyReviews: ProgramTypes.Review[] = Array.from(
     nickname: "닉네임",
     imageUrls: dummyProfileUrl,
     hashtags: ["30대", "가족과 함께"],
+    date: new Date().getTime(),
   })
 );
 
@@ -55,14 +56,13 @@ const dummyProgramDetail: ProgramTypes.Detail = {
   thumbnailUrl: commonUtils.getRandomItemFromArr(dummyProfileUrl),
   category: commonUtils.getRandomItemFromArr(dummyCategories),
   rate: Math.random() * 5,
-  description: `소개글: 아이부터 어른까지 
-즐겁게 체험할 수 있는 밤줍기!
+  description: `아이부터 어른까지 즐겁게 체험할 수 있는 밤줍기!
 장소: 경기도 오산
 비용: 2만원
 추천 연령대: 4세 이상`,
   healthResult: 234,
   relatedProgramIdList: [1, 2, 3, 4],
-  review: dummyReviews,
+  reviews: dummyReviews,
 };
 
 export const getPrograms = async () => {

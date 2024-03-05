@@ -3,4 +3,6 @@ import Banner from "./Banner/Banner";
 import BigMenuButton from "./BigMenuButton/BigMenuButton";
 
 import ProgramList from "./ProgramList/ProgramList";
-export { BannerCarousel, Banner, BigMenuButton, ProgramList };
+import ProgramTag from "./ProgramTag/ProgramTag";
+
+export { BannerCarousel, Banner, BigMenuButton, ProgramList, ProgramTag };

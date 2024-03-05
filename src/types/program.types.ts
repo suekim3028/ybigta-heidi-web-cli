@@ -14,12 +14,17 @@ export type Detail = Mini & {
   description: string;
   healthResult: number;
   relatedProgramIdList: number[];
-  review: Review[];
+  reviews: Review[];
+};
+
+export type DetailWithRelatedItems = Omit<Detail, "relatedProgramIdList"> & {
+  relatedProgramList: Mini[];
 };
 
 export type Review = {
   nickname: string;
   rate: number;
+  date: number;
   imageUrls: string[];
   hashtags: string[];
 };

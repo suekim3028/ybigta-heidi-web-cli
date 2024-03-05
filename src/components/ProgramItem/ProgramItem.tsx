@@ -2,6 +2,7 @@ import { ProgramTypes } from "@types";
 import { Button, Flex, Image, Rate, Tag, Typography } from "antd";
 import { DoubleRightOutlined, StarOutlined } from "@ant-design/icons";
 import { PROGRAM_CONTS } from "@constants";
+import { useRouter } from "next/router";
 const { Text } = Typography;
 
 const ProgramItem = ({
@@ -9,9 +10,17 @@ const ProgramItem = ({
   rate,
   thumbnailUrl,
   category,
+  id,
 }: ProgramTypes.Mini) => {
+  const router = useRouter();
+
   return (
-    <Flex justify="space-between" style={{ padding: 10 }} align="center">
+    <Flex
+      justify="space-between"
+      style={{ padding: 10 }}
+      align="center"
+      onClick={() => router.push(`/program/${id}`)}
+    >
       <Flex align={"center"} gap={12}>
         <Image
           src={thumbnailUrl}
