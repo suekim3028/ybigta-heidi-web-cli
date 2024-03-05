@@ -48,7 +48,7 @@ const items: TabsProps["items"] = [
   {
     key: "3",
     label: "투어",
-    children: "Content of Tab Pane 3",
+    children: <ProgramList showCategoryFilter />,
   },
 ];
 

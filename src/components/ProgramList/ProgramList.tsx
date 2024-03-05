@@ -2,7 +2,7 @@ import ProgramItem from "@components/ProgramItem/ProgramItem";
 import { PROGRAM_CONTS } from "@constants";
 import usePrograms from "@queries/usePrograms";
 import { ProgramTypes } from "@types";
-import { Empty, Flex, Space, Spin, Typography } from "antd";
+import { Empty, Flex, Row, Space, Spin, Typography } from "antd";
 import { useState } from "react";
 const { Text } = Typography;
 
@@ -34,33 +34,47 @@ const ProgramList = ({
       {showCategoryFilter ? (
         <Flex
           gap={4}
-          style={{ alignSelf: "center", justifyContent: "center" }}
+          style={{
+            alignSelf: "center",
+            justifyContent: "center",
+            padding: "0px 20px",
+          }}
           align="center"
         >
-          <Text strong style={{ marginRight: 10 }}>
-            체험종류
-          </Text>
-          {SELECTABLE_CATEGORIES.map((_category) => (
-            <Flex
-              onClick={() => setCategory(_category)}
-              style={{
-                padding: "4px 8px",
-                border: "1px solid rgba(0,0,0,0.2)",
-                borderRadius: 24,
-                backgroundColor:
-                  _category === category ? "rgba(0,0,0,0.05)" : undefined,
-              }}
-            >
-              <Text
+          <Flex>
+            <Text strong style={{ marginRight: 10 }}>
+              체험종류
+            </Text>
+          </Flex>
+          <Flex
+            flex={1}
+            style={{ width: "100%", overflowX: "scroll" }}
+            justify="flex-start"
+            gap={4}
+          >
+            {SELECTABLE_CATEGORIES.map((_category) => (
+              <Flex
+                onClick={() => setCategory(_category)}
                 style={{
-                  color: _category === category ? "black" : "rgba(0,0,0,0.8)",
+                  flexShrink: 0,
+                  padding: "4px 8px",
+                  border: "1px solid rgba(0,0,0,0.2)",
+                  borderRadius: 24,
+                  backgroundColor:
+                    _category === category ? "rgba(0,0,0,0.05)" : undefined,
                 }}
-                strong
               >
-                {_category}
-              </Text>
-            </Flex>
-          ))}
+                <Text
+                  style={{
+                    color: _category === category ? "black" : "rgba(0,0,0,0.8)",
+                  }}
+                  strong
+                >
+                  {_category}
+                </Text>
+              </Flex>
+            ))}
+          </Flex>
         </Flex>
       ) : (
         <></>
