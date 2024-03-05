@@ -24,6 +24,7 @@ export type DetailWithRelatedItems = Omit<Detail, "relatedProgramIdList"> & {
 export type Review = {
   nickname: string;
   rate: number;
+  body: string;
   date: number;
   imageUrls: string[];
   hashtags: string[];

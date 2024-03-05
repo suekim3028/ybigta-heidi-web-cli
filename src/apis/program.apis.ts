@@ -47,6 +47,10 @@ const dummyReviews: ProgramTypes.Review[] = Array.from(
     imageUrls: dummyProfileUrl,
     hashtags: ["30대", "가족과 함께"],
     date: new Date().getTime(),
+    body: `6살 아이와 함께 다녀와써요~
+    어쩌고
+    저쩌고
+    wfiajo]awefij;awoifeja;oif정말좋은 곳이에요 웃음웃ㅇ므`,
   })
 );
 
