@@ -1,3 +1,4 @@
+import { STYLE_CONSTS } from "@constants";
 import { commonHooks, userHooks } from "@hooks";
 import { UserTypes } from "@types";
 import {
@@ -8,6 +9,7 @@ import {
   FormInstance,
   Input,
   Row,
+  Space,
   notification,
 } from "antd";
 import { useRouter } from "next/router";
@@ -29,14 +31,17 @@ export const Login = () => {
   const router = useRouter();
 
   return (
-    <Flex style={{ padding: "0px 20px" }}>
+    <Flex style={{ padding: "0px 20px" }} vertical align="center" flex={1}>
       <Form
         form={form}
         name="validateOnly"
-        //   layout="vertical"
         labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600, width: "100%" }}
+        // wrapperCol={{ span: s16 }}
+        style={{
+          maxWidth: 600,
+          width: "100%",
+          alignItems: "center",
+        }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -58,18 +63,26 @@ export const Login = () => {
           <Input.Password />
         </Form.Item>
 
-        <Row>
-          <Button
-            size="large"
-            type={"text"}
-            onClick={() => router.push("sign-up")}
-          >
-            회원가입
-          </Button>
-          <Divider type={"vertical"} />
-          <Button type="text" size="large">
-            아이디/비밀번호 찾기
-          </Button>
+        <Row style={{ width: "100%", marginBottom: 50 }} justify={"center"}>
+          <Space>
+            <Button
+              size="small"
+              type={"text"}
+              style={{ color: STYLE_CONSTS.PRIMARY_COLOR }}
+              onClick={() => router.push("sign-up")}
+            >
+              회원가입
+            </Button>
+            <Divider type={"vertical"} />
+
+            <Button
+              type="text"
+              size="small"
+              style={{ color: STYLE_CONSTS.PRIMARY_COLOR }}
+            >
+              아이디/비밀번호 찾기
+            </Button>
+          </Space>
         </Row>
 
         <Form.Item wrapperCol={{ span: 24 }} style={{ marginTop: "auto" }}>
@@ -91,7 +104,7 @@ const SubmitButton = ({ form }: { form: FormInstance }) => {
       disabled={!submittable}
       size="large"
     >
-      Submit
+      로그인
     </Button>
   );
 };
