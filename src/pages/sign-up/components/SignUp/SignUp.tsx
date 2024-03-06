@@ -42,7 +42,6 @@ export const SignUp = () => {
         wrapperCol={{ span: 16 }}
         style={{
           maxWidth: 600,
-          minWidth: 400,
         }}
         labelAlign={"left"}
         initialValues={{ remember: true }}

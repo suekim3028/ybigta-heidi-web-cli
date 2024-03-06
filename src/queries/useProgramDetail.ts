@@ -5,9 +5,10 @@ import { ProgramTypes } from "@types";
 
 const useProgramDetail = ({ id }: { id?: number }) => {
   return useQuery<ProgramTypes.DetailWithRelatedItems>({
-    queryKey: getCommonQueryKey("PROGRAM_LIST"),
+    queryKey: getCommonQueryKey("PROGRAM_DETAIL", { id }),
     queryFn: async () => {
       const data = await programApis.getProgramDetail({ id: id as number });
+
       const relatedProgramList = await programApis.getProgramsByIdList(
         data.relatedProgramIdList
       );

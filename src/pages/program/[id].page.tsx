@@ -21,7 +21,7 @@ const Index = () => {
     }
   }, [_id, id]);
 
-  if (!id)
+  if (typeof id !== "number")
     return (
       <Flex style={{ padding: "60px" }} justify="center">
         <Spin />
@@ -29,7 +29,6 @@ const Index = () => {
     );
 
   if (!data) return <></>;
-
   const {
     thumbnailUrl,
     name,
@@ -42,7 +41,7 @@ const Index = () => {
 
   return (
     <Flex vertical>
-      <Flex vertical style={{ padding: 15, width: "100%" }}>
+      <Flex vertical style={{ padding: 15 }}>
         <Flex>
           <Image
             src={thumbnailUrl}
@@ -94,43 +93,45 @@ const Index = () => {
         <Text style={{ fontSize: 20, marginLeft: 16 }} strong>
           연관 상품
         </Text>
-        <Flex
-          style={{
-            width: "100%",
-            padding: 16,
-            // overflowY: "visible",
-            overflowX: "scroll",
-            scrollbarWidth: "none",
-          }}
-          gap={10}
-        >
-          {relatedProgramList.map((program) => (
-            <Flex
-              vertical
-              style={{
-                padding: "20px ",
-                borderRadius: 10,
-                boxShadow: "0px 0px 20px rgba(0,0,0,0.1)",
-              }}
-              gap={4}
-            >
-              <Image
-                preview={false}
-                src={program.thumbnailUrl}
-                width={120}
-                style={{ borderRadius: 10, marginBottom: 12 }}
-              />
-              <ProgramTag category={program.category} />
-              <Text strong>{program.name}</Text>
-            </Flex>
-          ))}
+        <Flex>
+          <Flex
+            style={{
+              width: "100%",
+              padding: 16,
+              overflowX: "scroll",
+              scrollbarWidth: "none",
+            }}
+            gap={12}
+          >
+            {relatedProgramList.map((program) => (
+              <Flex
+                vertical
+                style={{
+                  padding: "20px ",
+                  borderRadius: 10,
+                  boxShadow: "0px 0px 20px rgba(0,0,0,0.1)",
+                }}
+                gap={4}
+              >
+                <Image
+                  preview={false}
+                  src={program.thumbnailUrl}
+                  width={120}
+                  style={{ borderRadius: 10, marginBottom: 12 }}
+                />
+                <ProgramTag category={program.category} />
+                <Text strong>{program.name}</Text>
+              </Flex>
+            ))}
+          </Flex>
         </Flex>
       </Flex>
+
       <Flex vertical>
         <Text style={{ fontSize: 20, marginLeft: 16 }} strong>
           후기
         </Text>
-        <Flex vertical style={{ padding: 20, width: "100%" }} gap={20}>
+        <Flex vertical style={{ padding: 20 }} gap={20}>
           {reviews.map((review) => (
             <Flex
               vertical
