@@ -48,7 +48,11 @@ const ProgramList = ({
           </Flex>
           <Flex
             flex={1}
-            style={{ width: "100%", overflowX: "scroll" }}
+            style={{
+              width: "100%",
+              overflowX: "scroll",
+              scrollbarWidth: "none",
+            }}
             justify="flex-start"
             gap={4}
           >

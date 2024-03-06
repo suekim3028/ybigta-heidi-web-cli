@@ -10,24 +10,12 @@ const LoginPage = () => {
   const router = useRouter();
   userHooks.useGuestOnly();
   return (
-    <>
-      <Flex vertical>
+    <Flex vertical flex={1} justify="space-between">
+      <Flex vertical style={{ padding: 20 }}>
         <Typography.Title>Login</Typography.Title>
-        <Login />
-        <Flex vertical={false} gap={"small"}>
-          <Button
-            size="large"
-            type={"dashed"}
-            onClick={() => router.push("sign-up")}
-          >
-            회원가입
-          </Button>
-          <Button type="text" size="large">
-            아이디/비밀번호 찾기
-          </Button>
-        </Flex>
       </Flex>
-    </>
+      <Login />
+    </Flex>
   );
 };
 

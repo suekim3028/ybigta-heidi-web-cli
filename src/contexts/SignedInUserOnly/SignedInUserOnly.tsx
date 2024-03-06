@@ -23,8 +23,8 @@ const SignedInUserOnly = ({ children }: { children: React.ReactNode }) => {
       const [user] = state.state;
 
       if (!user) {
-        router.replace("/login");
-        notification.info({ message: "먼저 로그인 해주세요 :)" });
+        router.replace("/login-landing");
+        notification.info({ message: "서비스 이용 전 로그인이 필요합니다 :)" });
       }
     }
   }, [state]);
