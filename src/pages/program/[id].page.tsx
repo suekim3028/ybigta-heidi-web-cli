@@ -111,6 +111,7 @@ const Index = () => {
                   borderRadius: 10,
                   boxShadow: "0px 0px 20px rgba(0,0,0,0.1)",
                 }}
+                onClick={() => router.push(`/program/${program.id}`)}
                 gap={4}
               >
                 <Image
