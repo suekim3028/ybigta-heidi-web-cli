@@ -6,9 +6,15 @@ export const GENDER_LABEL: Record<UserTypes.Gender, string> = {
   M: "남자",
 };
 
-export const STRENGTH_LIST = ["WEAK", "NORMAL", "STRONG"] as const;
-export const STRENGTH_LABEL: Record<UserTypes.Strength, string> = {
-  NORMAL: "보통",
-  STRONG: "좋음",
-  WEAK: "약함",
-};
+
+export const JOB_LIST = ["학생","주부"] as const
+
+export const AREA_LIST : ({
+  area1: string;
+  area2: string[]
+})[] = [
+  {
+    area1: "서울시",
+    area2:["강남구","서대문구"],
+  }
+]

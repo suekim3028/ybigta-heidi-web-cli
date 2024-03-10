@@ -10,7 +10,7 @@ import ApiError from "./ApiError";
 import { TokenStorage } from "@storage";
 const qs = require("qs");
 
-class API implements APIInstance {
+class APIClass implements APIInstance {
   private headers: Record<string, any> = {};
   private instance: AxiosInstance | null = null;
   private useConsole = false;
@@ -166,4 +166,4 @@ export interface APIInstance {
   patch<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T>;
 }
 
-export default new API();
+export default new APIClass();

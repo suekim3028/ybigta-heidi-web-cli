@@ -1,18 +1,25 @@
 import { USER_CONSTS } from "@constants";
 
+
 export type Gender = (typeof USER_CONSTS.GENDER_LIST)[number];
+export type Job = (typeof USER_CONSTS.JOB_LIST)[number];
 
-export type Strength = (typeof USER_CONSTS.STRENGTH_LIST)[number];
-
+type AreaLevel1 = string;
+type AreaLevel2 = string
 export type SignUpUser = {
-  id: string;
   password: string;
   name: string;
   gender: Gender;
   height: number;
   weight: number;
-  strength: Strength;
+  email: string;
+  birthYear: number;
+  job: Job;
+  phoneLocalNumber: string;
+  phoneCountryCode: string;
+  area : [AreaLevel1, AreaLevel2];
+  hasChildren: boolean
 };
 
-export type User = Omit<SignUpUser, "password">;
-export type SignInUser = Pick<SignUpUser, "id" | "password">;
+export type User = Omit<SignUpUser, "password"> & {id: string};
+export type SignInUser = Pick<SignUpUser, "email" | "password">;

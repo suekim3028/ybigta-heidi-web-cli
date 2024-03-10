@@ -1,3 +1,4 @@
+import { API } from "@apis";
 import theme from "@styles/themeConfig";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConfigProvider } from "antd";
@@ -27,5 +28,9 @@ const App = ({ Component, pageProps }: AppProps) => {
     </React.StrictMode>
   );
 };
+
+API.initInstance({
+  baseURL: process.env.NEXT_PUBLIC_FAST_API_SERVER,
+});
 
 export default App;

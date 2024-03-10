@@ -1,5 +1,5 @@
 export type EnvConfig = {
-  FAST_API_SERVER: string;
+  NEXT_PUBLIC_FAST_API_SERVER: string;
 };
 
 export type Banner = {

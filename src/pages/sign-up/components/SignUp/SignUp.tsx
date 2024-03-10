@@ -1,21 +1,41 @@
+import { userApis } from "@apis";
 import { STYLE_CONSTS, USER_CONSTS } from "@constants";
 import { commonHooks, userHooks } from "@hooks";
 import { UserTypes } from "@types";
 import {
   Button,
+  Cascader,
   Flex,
   Form,
   Input,
   InputNumber,
   Radio,
   Select,
+  Space,
   Typography,
   notification,
 } from "antd";
 
+const { Option } = Select;
+
 const { Text } = Typography;
+
+interface Option {
+  value: string;
+  label: string;
+  children?: Option[];
+}
+
+const areaOptions: Option[] = USER_CONSTS.AREA_LIST.map(
+  ({ area1, area2: area2List }): Option => ({
+    value: area1,
+    label: area1,
+    children: area2List.map((area2) => ({ value: area2, label: area2 })),
+  })
+);
+
 export const SignUp = () => {
-  const [form] = Form.useForm();
+  const [form] = Form.useForm<UserTypes.SignUpUser>();
   const { submittable } = commonHooks.useFormSubmittable(form);
   const { signUp } = userHooks.useAuth();
 
@@ -28,6 +48,14 @@ export const SignUp = () => {
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
+
+  const prefixSelector = (
+    <Form.Item<UserTypes.SignUpUser> name="phoneCountryCode" noStyle>
+      <Select style={{ width: 70 }}>
+        <Option value="82">+82</Option>
+      </Select>
+    </Form.Item>
+  );
 
   return (
     <Flex style={{ padding: "60px 40px" }} vertical gap={40}>
@@ -64,11 +92,25 @@ export const SignUp = () => {
           <Input />
         </Form.Item>
         <Form.Item<UserTypes.SignUpUser>
-          label="아이디"
-          name="id"
-          rules={[{ required: true, message: "아이디를 입력해주세요." }]}
+          label="이메일"
+          name="email"
+          rules={[
+            {
+              required: true,
+              type: "email",
+              message: "이메일을 입력해주세요.",
+            },
+          ]}
         >
           <Input />
+        </Form.Item>
+
+        <Form.Item<UserTypes.SignUpUser>
+          name="phoneLocalNumber"
+          label="전화번호"
+          rules={[{ required: true, message: "전화번호를 입력해주세요." }]}
+        >
+          <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
         </Form.Item>
         <Form.Item<UserTypes.SignUpUser>
           label="비밀번호"
@@ -77,6 +119,38 @@ export const SignUp = () => {
         >
           <Input.Password />
         </Form.Item>
+        <Form.Item<UserTypes.SignUpUser>
+          label="출생연도"
+          name="birthYear"
+          rules={[{ required: true, message: "출생연도를 입력해주세요." }]}
+        >
+          <InputNumber min={1900} max={new Date().getFullYear()} />
+        </Form.Item>
+
+        <Form.Item<UserTypes.SignUpUser>
+          label="직업"
+          name="job"
+          rules={[{ required: true, message: "직업을 입력해주세요." }]}
+        >
+          <Select>
+            {USER_CONSTS.JOB_LIST.map((job) => (
+              <Select.Option value={job}>{job}</Select.Option>
+            ))}
+          </Select>
+        </Form.Item>
+        <Form.Item<UserTypes.SignUpUser>
+          label="자녀 유무"
+          name="hasChildren"
+          rules={[{ required: true, message: "자녀 유무를 입력해주세요." }]}
+        >
+          <Radio.Group>
+            <Space direction="vertical">
+              <Radio value={true}>자녀 있음</Radio>
+              <Radio value={false}>자녀 없음</Radio>
+          </Space>
+          </Radio.Group>
+        </Form.Item>
+
         <Flex style={{ padding: "30px 0px 20px" }}>
           <Typography.Text
             style={{ fontSize: 20, color: STYLE_CONSTS.PRIMARY_COLOR }}
@@ -126,18 +200,11 @@ export const SignUp = () => {
           </Form.Item>
 
           <Form.Item<UserTypes.SignUpUser>
-            label="평소 체력"
-            name="strength"
             rules={[{ required: true, message: "키를 입력해주세요." }]}
+            label={"사는 지역"}
+            name={"area"}
           >
-            <Select>
-              {USER_CONSTS.STRENGTH_LIST.map((value) => (
-                <Radio value={value}>
-                  {" "}
-                  {USER_CONSTS.STRENGTH_LABEL[value]}{" "}
-                </Radio>
-              ))}
-            </Select>
+            <Cascader options={areaOptions} />
           </Form.Item>
         </Flex>
 
