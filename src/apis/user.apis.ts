@@ -30,12 +30,7 @@ type SignUpData = Omit<
   area_level_2: string;
 };
 
-
-
-
-export const signUp = async (
-  signUpUser: UserTypes.SignUpUser
-) => {
+export const signUp = async (signUpUser: UserTypes.SignUpUser) => {
   const {
     birthYear,
     hasChildren,
@@ -56,6 +51,6 @@ export const signUp = async (
   };
   const res = await API.post<SignInResponse>("/users", data);
   console.log(res);
-  
-  return res
+
+  return res;
 };

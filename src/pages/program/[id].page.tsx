@@ -1,34 +1,23 @@
+import { StarOutlined } from "@ant-design/icons";
 import { ProgramTag } from "@components";
-import useProgramDetail from "@queries/useProgramDetail";
-import { commonUtils } from "@utils";
+import { commonHooks } from "@hooks";
 import { Button, Col, Flex, Image, Row, Spin, Tag, Typography } from "antd";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { DoubleRightOutlined, StarOutlined } from "@ant-design/icons";
 
 const { Text, Title } = Typography;
 
 const Index = () => {
   const router = useRouter();
-  const _id = router.query.id;
 
-  const id = typeof _id === "string" ? commonUtils.parseNum(_id) : null;
-  const { data, isLoading } = useProgramDetail({ id: id ?? undefined });
+  const { data } = commonHooks.useProductDetailOnIdQuery();
 
-  useEffect(() => {
-    if (_id !== undefined && id === null) {
-      router.replace("/");
-    }
-  }, [_id, id]);
-
-  if (typeof id !== "number")
+  if (!data)
     return (
       <Flex style={{ padding: "60px" }} justify="center">
         <Spin />
       </Flex>
     );
 
-  if (!data) return <></>;
   const {
     thumbnailUrl,
     name,
@@ -37,6 +26,7 @@ const Index = () => {
     relatedProgramList,
     reviews,
     category,
+    id,
   } = data;
 
   return (

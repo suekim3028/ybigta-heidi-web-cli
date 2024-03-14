@@ -34,6 +34,8 @@ const SignedInUserOnly = ({ children }: { children: React.ReactNode }) => {
   }
 
   const [user] = state.state;
+
+  console.log(user);
   if (!user) return <></>;
 
   return (
