@@ -5,6 +5,7 @@ import {
   Card,
   Carousel,
   Flex,
+  Image,
   Tabs,
   TabsProps,
   Typography,
@@ -13,8 +14,9 @@ import { Inter } from "next/font/google";
 import Head from "next/head";
 import MenuList from "./index/components/MenuList/MenuList";
 import { BannerCarousel, BrowserViewWrapper, ProgramList } from "@components";
-
+const { Text } = Typography;
 const inter = Inter({ subsets: ["latin"] });
+import MdCurating from "@public/images/md_curating.png";
 const HeadComponent = () => (
   <Head>
     <title>Create Next App</title>
@@ -28,6 +30,12 @@ const TabComponent = () => {
   return (
     <Flex vertical>
       <BannerCarousel />
+      <Flex vertical flex={1} align="center" style={{ paddingBottom: 20 }}>
+        <Image
+          src={"/images/md_curating.png"}
+          // width={"90%"}
+        />
+      </Flex>
       <MenuList />
       <ProgramList />
     </Flex>
