@@ -72,8 +72,10 @@ const dummyProgramDetail: ProgramTypes.Detail = {
 type GetProgramsResponse = {
   programs: ProgramTypes.Mini[];
 };
-export const getPrograms = (userId: number) =>
-  API.get<GetProgramsResponse>(`/programs/${userId}`);
+export const getPrograms = async (userId: number) => ({
+  programs: dummyPrograms,
+});
+// API.get<GetProgramsResponse>(`/programs/${userId}`);
 
 export const getProgramDetail = async ({
   id,

@@ -33,7 +33,7 @@ const IndexComponent = () => {
         <Flex vertical style={{ padding: 15 }}>
           <Flex>
             <Image
-              src={""} // TODO
+              src={programUtils.getProgramThumbnail({ category })}
               width={"100%"}
               height={"100%"}
               preview={false}
@@ -111,6 +111,7 @@ const IndexComponent = () => {
                     preview={false}
                     src={programUtils.getProgramThumbnail(program)}
                     width={120}
+                    height={80}
                     style={{ borderRadius: 10, marginBottom: 12 }}
                   />
                   <ProgramTag category={program.category} />
