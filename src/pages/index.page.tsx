@@ -62,7 +62,39 @@ const items: TabsProps["items"] = [
   {
     key: "3",
     label: "투어",
-    children: <ProgramList showCategoryFilter />,
+    children: (
+      <Flex vertical gap={20}>
+        <Flex
+          style={{
+            margin: "10px 20px",
+            // border: "1px solid gray",
+            padding: 20,
+            borderRadius: 15,
+            boxShadow: "2px 2px 20px rgba(0,0,0,0.15)",
+          }}
+          gap={20}
+          align="center"
+        >
+          <Image
+            src={"https://cdn-icons-png.flaticon.com/512/5609/5609566.png"}
+            width={60}
+            height={60}
+          />
+          <Flex
+            vertical
+
+            // align="flex-end"
+          >
+            <Text> 나의 여행 기록을 한번에</Text>
+            <Text style={{ fontSize: 20, fontWeight: 600 }} strong>
+              스탬프 투어 하러 가기
+            </Text>
+          </Flex>
+        </Flex>
+
+        <ProgramList showCategoryFilter />
+      </Flex>
+    ),
   },
 ];
 
