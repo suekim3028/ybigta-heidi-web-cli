@@ -1,10 +1,11 @@
 import { PROGRAM_CONTS } from "@constants";
 import { ProgramTypes } from "@types";
 import { commonUtils } from "@utils";
+import API from "./API";
 
 const dummyNames = [
   "프로그램 1",
-  "프로그램 2",
+  "프로그램 2ㅁㅈㄹ댜ㅕㅗ미ㅑㄷ려ㅗ미ㅑ뎌로미ㅗㄹ뎌",
   "프로그램 3",
   "프로그램 4",
   "프로그램 5",
@@ -33,9 +34,9 @@ const dummyPrograms: ProgramTypes.Mini[] = Array.from(
   (_, id): ProgramTypes.Mini => ({
     id,
     name: commonUtils.getRandomItemFromArr(dummyNames),
-    thumbnailUrl: commonUtils.getRandomItemFromArr(dummyProfileUrl),
     category: commonUtils.getRandomItemFromArr(dummyCategories),
     rate: Math.random() * 5,
+    place: "국립산림체험관",
   })
 );
 
@@ -57,28 +58,31 @@ const dummyReviews: ProgramTypes.Review[] = Array.from(
 const dummyProgramDetail: ProgramTypes.Detail = {
   id: 1,
   name: commonUtils.getRandomItemFromArr(dummyNames),
-  thumbnailUrl: commonUtils.getRandomItemFromArr(dummyProfileUrl),
   category: commonUtils.getRandomItemFromArr(dummyCategories),
   rate: Math.random() * 5,
-  description: `아이부터 어른까지 즐겁게 체험할 수 있는 밤줍기!
-장소: 경기도 오산
-비용: 2만원
-추천 연령대: 4세 이상`,
   healthResult: 234,
-  relatedProgramIdList: [1, 2, 3, 4],
+  place: "국립산림체험관",
+  duration: 2,
+  maxPeople: 4,
+  fee: 23000,
+  address: "경기도 화성시 봉담읍 와우리 쌍용 a-2",
   reviews: dummyReviews,
 };
 
-export const getPrograms = async () => {
-  await new Promise((resolve: (value: null) => void) => {
-    setTimeout(resolve, 2000);
-  });
-  return dummyPrograms;
+type GetProgramsResponse = {
+  programs: ProgramTypes.Mini[];
 };
+export const getPrograms = (userId: number) =>
+  API.get<GetProgramsResponse>(`/programs/${userId}`);
 
-export const getProgramDetail = async ({ id }: { id: number }) => {
-  return dummyProgramDetail;
-};
+export const getProgramDetail = async ({
+  id,
+  userId,
+}: {
+  id: number;
+  userId: number;
+}) => ({ program: dummyProgramDetail });
+//  => API.get<GetProgramsResponse>(`/program/${userId}/${id}`);
 
 export const getProgramsByIdList = async (idList: number[]) =>
   Array.from({ length: idList.length }, () => dummyPrograms[0]);

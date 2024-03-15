@@ -1,5 +1,6 @@
 import ProgramItem from "@components/ProgramItem/ProgramItem";
 import { PROGRAM_CONTS } from "@constants";
+import { useSignedInUserOnly } from "@contexts";
 import usePrograms from "@queries/usePrograms";
 import { ProgramTypes } from "@types";
 import { Empty, Flex, Row, Space, Spin, Typography } from "antd";
@@ -19,13 +20,14 @@ const ProgramList = ({
 }: {
   showCategoryFilter?: boolean;
 }) => {
-  const { data: _data, isLoading } = usePrograms();
+  const { user } = useSignedInUserOnly();
+  const { data: _data, isLoading } = usePrograms(user.id);
   const [category, setCategory] = useState<SelectableCategory>("전체");
 
   if (!_data)
     return isLoading ? <Spin style={{ margin: "60px 0px" }} /> : <Empty />;
 
-  const data = _data.filter(({ category: _category }) =>
+  const data = _data.programs.filter(({ category: _category }) =>
     category === "전체" ? true : category === _category
   );
 

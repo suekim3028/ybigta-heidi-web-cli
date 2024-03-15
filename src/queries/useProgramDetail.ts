@@ -3,18 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 import getCommonQueryKey from "./getCommonQueryKey";
 import { ProgramTypes } from "@types";
 
-const useProgramDetail = ({ id }: { id?: number }) => {
-  return useQuery<ProgramTypes.DetailWithRelatedItems>({
+const useProgramDetail = ({ id, userId }: { id?: number; userId: number }) => {
+  return useQuery({
     queryKey: getCommonQueryKey("PROGRAM_DETAIL", { id }),
-    queryFn: async () => {
-      const data = await programApis.getProgramDetail({ id: id as number });
-
-      const relatedProgramList = await programApis.getProgramsByIdList(
-        data.relatedProgramIdList
-      );
-
-      return { ...data, relatedProgramList };
-    },
+    queryFn: () => programApis.getProgramDetail({ id: id as number, userId }),
     enabled: id !== undefined,
   });
 };
