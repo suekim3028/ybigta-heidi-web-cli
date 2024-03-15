@@ -6,7 +6,12 @@ const ProgramTag = ({ category }: { category: ProgramTypes.Category }) => {
   return (
     <Tag
       color={PROGRAM_CONTS.CATEGORY_TAG_COLOR[category]}
-      style={{ fontSize: 12, padding: "0px 4px", alignSelf: "flex-start" }}
+      style={{
+        fontSize: 12,
+        padding: "0px 4px",
+        alignSelf: "flex-start",
+        marginTop: 6,
+      }}
       bordered={false}
     >
       {category}

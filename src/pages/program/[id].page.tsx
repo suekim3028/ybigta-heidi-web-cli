@@ -119,14 +119,14 @@ const IndexComponent = () => {
                     boxShadow: "0px 0px 20px rgba(0,0,0,0.1)",
                   }}
                   onClick={() => router.push(`/program/${program.id}`)}
-                  gap={4}
+                  gap={6}
                 >
                   <Image
                     preview={false}
                     src={programUtils.getProgramThumbnail(program)}
                     width={120}
                     height={80}
-                    style={{ borderRadius: 10, marginBottom: 12 }}
+                    style={{ borderRadius: 10, marginBottom: 16 }}
                   />
                   <ProgramTag category={program.category} />
                   <Text strong>{program.name}</Text>
