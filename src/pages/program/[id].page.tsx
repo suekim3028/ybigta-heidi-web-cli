@@ -6,6 +6,7 @@ import usePrograms from "@queries/usePrograms";
 import { programUtils } from "@utils";
 import { Button, Col, Flex, Image, Row, Spin, Tag, Typography } from "antd";
 import { useRouter } from "next/router";
+import InfoRow from "./components/InfoRow";
 
 const { Text, Title } = Typography;
 
@@ -25,7 +26,17 @@ const IndexComponent = () => {
       </Flex>
     );
 
-  const { name, healthResult, reviews, category, id } = data.program;
+  const {
+    name,
+    healthResult,
+    reviews,
+    fee,
+    category,
+    id,
+    duration,
+    maxPeople,
+    address,
+  } = data.program;
 
   return (
     <>
@@ -40,14 +51,17 @@ const IndexComponent = () => {
               style={{ borderRadius: 20, objectFit: "cover", minWidth: 200 }}
             />
           </Flex>
-          <Flex vertical flex={1} style={{ padding: "20px 0px" }} gap={12}>
-            <Flex vertical gap={10}>
+          <Flex vertical flex={1} style={{ padding: "20px 0px" }} gap={9}>
+            <Flex vertical gap={8} style={{ paddingBottom: 10 }}>
               <ProgramTag category={category} />
               <Text strong style={{ fontSize: 20 }}>
                 {name}
               </Text>
+              <Text>{address}</Text>
             </Flex>
-            <Text style={{ whiteSpace: "pre-line" }}>{"....."}</Text>
+            <InfoRow title={"소요시간"} body={`${duration}시간`} />
+            <InfoRow title={"최대 인원"} body={`${maxPeople}명`} />
+            <InfoRow title={"요금"} body={`${fee.toLocaleString()}원`} />
           </Flex>
           <Flex
             style={{
