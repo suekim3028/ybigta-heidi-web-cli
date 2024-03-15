@@ -44,7 +44,7 @@ const IndexComponent = () => {
         <Flex vertical style={{ padding: 15 }}>
           <Flex>
             <Image
-              src={programUtils.getProgramThumbnail({ category })}
+              src={programUtils.getProgramThumbnail({ category, id })}
               width={"100%"}
               height={"100%"}
               preview={false}

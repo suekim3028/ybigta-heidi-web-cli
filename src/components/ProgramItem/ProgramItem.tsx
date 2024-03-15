@@ -25,7 +25,7 @@ const ProgramItem = ({
       <Flex align={"center"} gap={12} justify="space-between" flex={1}>
         <Flex flex={0}>
           <Image
-            src={programUtils.getProgramThumbnail({ category })}
+            src={programUtils.getProgramThumbnail({ category, id })}
             preview={false}
             width={60}
             height={60}
