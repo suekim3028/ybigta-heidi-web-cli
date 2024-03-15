@@ -3,15 +3,10 @@ import { Button, Flex, Image, Rate, Tag, Typography } from "antd";
 import { DoubleRightOutlined, StarOutlined } from "@ant-design/icons";
 import { PROGRAM_CONTS } from "@constants";
 import { useRouter } from "next/router";
+import { programUtils } from "@utils";
 const { Text } = Typography;
 
-const ProgramItem = ({
-  name,
-  rate,
-  thumbnailUrl,
-  category,
-  id,
-}: ProgramTypes.Mini) => {
+const ProgramItem = ({ name, rate, category, id }: ProgramTypes.Mini) => {
   const router = useRouter();
 
   return (
@@ -23,7 +18,7 @@ const ProgramItem = ({
     >
       <Flex align={"center"} gap={12}>
         <Image
-          src={thumbnailUrl}
+          src={programUtils.getProgramThumbnail({ category })}
           preview={false}
           width={60}
           height={60}

@@ -3,12 +3,12 @@ import { commonUtils } from "@utils";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-export const useProductDetailOnIdQuery = () => {
+export const useProductDetailOnIdQuery = (userId: number) => {
   const router = useRouter();
   const _id = router.query.id;
 
   const id = typeof _id === "string" ? commonUtils.parseNum(_id) : null;
-  const { data, isLoading } = useProgramDetail({ id: id ?? undefined });
+  const { data, isLoading } = useProgramDetail({ id: id ?? undefined, userId });
 
   useEffect(() => {
     if (_id !== undefined && id === null) {

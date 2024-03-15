@@ -48,9 +48,15 @@ export const Login = () => {
         autoComplete="off"
       >
         <Form.Item<UserTypes.SignInUser>
-          label="아이디"
-          name="id"
-          rules={[{ required: true, message: "아이디를 입력해주세요." }]}
+          label="이메일"
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: "이메일을 입력해주세요.",
+              type: "email",
+            },
+          ]}
         >
           <Input />
         </Form.Item>

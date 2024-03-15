@@ -1,33 +1,31 @@
 import { StarOutlined } from "@ant-design/icons";
 import { ProgramTag } from "@components";
+import { SignedInUserOnly, useSignedInUserOnly } from "@contexts";
 import { commonHooks } from "@hooks";
+import usePrograms from "@queries/usePrograms";
+import { programUtils } from "@utils";
 import { Button, Col, Flex, Image, Row, Spin, Tag, Typography } from "antd";
 import { useRouter } from "next/router";
 
 const { Text, Title } = Typography;
 
-const Index = () => {
+const IndexComponent = () => {
   const router = useRouter();
 
-  const { data } = commonHooks.useProductDetailOnIdQuery();
+  const {
+    user: { id: userId },
+  } = useSignedInUserOnly();
+  const { data } = commonHooks.useProductDetailOnIdQuery(userId);
+  const { data: recommendedProgramsData } = usePrograms(userId);
 
-  if (!data)
+  if (!data || !recommendedProgramsData)
     return (
       <Flex style={{ padding: "60px" }} justify="center">
         <Spin />
       </Flex>
     );
 
-  const {
-    thumbnailUrl,
-    name,
-    description,
-    healthResult,
-    relatedProgramList,
-    reviews,
-    category,
-    id,
-  } = data;
+  const { name, healthResult, reviews, category, id } = data.program;
 
   return (
     <>
@@ -35,7 +33,7 @@ const Index = () => {
         <Flex vertical style={{ padding: 15 }}>
           <Flex>
             <Image
-              src={thumbnailUrl}
+              src={""} // TODO
               width={"100%"}
               height={"100%"}
               preview={false}
@@ -49,7 +47,7 @@ const Index = () => {
                 {name}
               </Text>
             </Flex>
-            <Text style={{ whiteSpace: "pre-line" }}>{description}</Text>
+            <Text style={{ whiteSpace: "pre-line" }}>{"....."}</Text>
           </Flex>
           <Flex
             style={{
@@ -98,7 +96,7 @@ const Index = () => {
               }}
               gap={12}
             >
-              {relatedProgramList.map((program) => (
+              {recommendedProgramsData.programs.map((program) => (
                 <Flex
                   vertical
                   style={{
@@ -111,7 +109,7 @@ const Index = () => {
                 >
                   <Image
                     preview={false}
-                    src={program.thumbnailUrl}
+                    src={programUtils.getProgramThumbnail(program)}
                     width={120}
                     style={{ borderRadius: 10, marginBottom: 12 }}
                   />
@@ -192,6 +190,14 @@ const Index = () => {
         예약하기
       </Button>
     </>
+  );
+};
+
+const Index = () => {
+  return (
+    <SignedInUserOnly>
+      <IndexComponent />
+    </SignedInUserOnly>
   );
 };
 
