@@ -24,7 +24,7 @@ const dummyProfileUrl = [
 ];
 
 const dummyCategories: ProgramTypes.Category[] = [
-  "둘레길",
+  "숲길",
   "등산로",
   "산림 치유원",
   "숲 체험",
