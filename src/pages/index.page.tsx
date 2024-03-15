@@ -29,14 +29,20 @@ const HeadComponent = () => (
 const TabComponent = () => {
   return (
     <Flex vertical>
-      <BannerCarousel />
-      <Flex vertical flex={1} align="center" style={{ paddingBottom: 20 }}>
+      <MenuList />
+      <Flex vertical flex={1} align="center">
         <Image
           src={"/images/md_curating.png"}
           // width={"90%"}
         />
       </Flex>
-      <MenuList />
+      <BannerCarousel />
+      <Flex style={{ padding: "20px 20px 0px" }} vertical>
+        <Text> 지금 떠나고 싶은 당신을 위한</Text>
+        <Text style={{ fontSize: 20, fontWeight: 600 }} strong>
+          맞춤 추천 프로그램
+        </Text>
+      </Flex>
       <ProgramList />
     </Flex>
   );

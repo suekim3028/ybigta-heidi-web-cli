@@ -9,14 +9,14 @@ const BigMenuButton = ({
   size,
 }: CommonTypes.Menu & { size: "small" | "default" }) => {
   return (
-    <Card
-      size={size}
+    <Flex
       style={{
-        width: "100%",
+        // width: "100%",
+        padding: "10px 20px",
         overflow: "hidden",
-        boxShadow: "0px 0px 20px rgba(0,0,0,0.1)",
+        border: "1px solid rgba(0,0,0,0.1)",
+        // boxShadow: "0px 0px 20px rgba(0,0,0,0.1)",
       }}
-      bordered={false}
     >
       {!!logoUrl && (
         <div
@@ -56,7 +56,7 @@ const BigMenuButton = ({
           {title}
         </Text>
       </Flex>
-    </Card>
+    </Flex>
   );
 };
 
