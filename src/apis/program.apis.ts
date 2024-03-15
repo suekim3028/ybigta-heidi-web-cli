@@ -72,19 +72,29 @@ const dummyProgramDetail: ProgramTypes.Detail = {
 type GetProgramsResponse = {
   programs: ProgramTypes.Mini[];
 };
-export const getPrograms = async (userId: number) => ({
-  programs: dummyPrograms,
-});
-// API.get<GetProgramsResponse>(`/programs/${userId}`);
+export const getPrograms = async (userId: number) =>
+  API.get<GetProgramsResponse>(`/programs`, { params: { user_id: userId } });
+
+type GetProgramDetailResponse = {
+  program: Omit<
+    ProgramTypes.Detail,
+    keyof Pick<ProgramTypes.Detail, "reviews">
+  >;
+};
 
 export const getProgramDetail = async ({
-  id,
+  programId,
   userId,
 }: {
-  id: number;
+  programId: number;
   userId: number;
-}) => ({ program: dummyProgramDetail });
-//  => API.get<GetProgramsResponse>(`/program/${userId}/${id}`);
+}): Promise<{ program: ProgramTypes.Detail }> => {
+  const { program } = await API.get<GetProgramDetailResponse>(`/program`, {
+    params: { program_id: programId, user_id: userId },
+  });
+
+  return { program: { ...program, reviews: dummyReviews } };
+};
 
 export const getProgramsByIdList = async (idList: number[]) =>
   Array.from({ length: idList.length }, () => dummyPrograms[0]);

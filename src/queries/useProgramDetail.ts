@@ -6,7 +6,8 @@ import { ProgramTypes } from "@types";
 const useProgramDetail = ({ id, userId }: { id?: number; userId: number }) => {
   return useQuery({
     queryKey: getCommonQueryKey("PROGRAM_DETAIL", { id }),
-    queryFn: () => programApis.getProgramDetail({ id: id as number, userId }),
+    queryFn: () =>
+      programApis.getProgramDetail({ programId: id as number, userId }),
     enabled: id !== undefined,
   });
 };
