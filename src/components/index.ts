@@ -5,7 +5,7 @@ import BigMenuButton from "./BigMenuButton/BigMenuButton";
 import ProgramList from "./ProgramList/ProgramList";
 import ProgramTag from "./ProgramTag/ProgramTag";
 import BrowserViewWrapper from "./BrowserViewWrapper/BrowserViewWrapper";
-
+import Header from "./Header/Header";
 export {
   BannerCarousel,
   Banner,
@@ -13,4 +13,5 @@ export {
   ProgramList,
   ProgramTag,
   BrowserViewWrapper,
+  Header,
 };

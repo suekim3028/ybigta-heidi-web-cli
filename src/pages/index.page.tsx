@@ -13,7 +13,12 @@ import {
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import MenuList from "./index/components/MenuList/MenuList";
-import { BannerCarousel, BrowserViewWrapper, ProgramList } from "@components";
+import {
+  BannerCarousel,
+  BrowserViewWrapper,
+  Header,
+  ProgramList,
+} from "@components";
 const { Text } = Typography;
 const inter = Inter({ subsets: ["latin"] });
 import MdCurating from "@public/images/md_curating.png";
@@ -103,6 +108,8 @@ const Index = () => {
     <SignedInUserOnly>
       <BrowserViewWrapper>
         <HeadComponent />
+        <Header home />
+
         <Tabs
           defaultActiveKey="2"
           items={items}
