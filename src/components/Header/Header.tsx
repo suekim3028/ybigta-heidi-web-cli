@@ -2,8 +2,10 @@ import { Button, Flex, Image, Typography } from "antd";
 import { ReactNode } from "react";
 const { Text } = Typography;
 import { LeftOutlined } from "@ant-design/icons";
+import { useRouter } from "next/router";
 
 const Header = ({ home }: { home?: boolean }) => {
+  const router = useRouter();
   return (
     <Flex
       style={{
@@ -31,7 +33,11 @@ const Header = ({ home }: { home?: boolean }) => {
         </>
       ) : (
         <>
-          <Button shape="circle" icon={<LeftOutlined />} />
+          <Button
+            shape="circle"
+            icon={<LeftOutlined />}
+            onClick={router.back}
+          />
         </>
       )}
     </Flex>

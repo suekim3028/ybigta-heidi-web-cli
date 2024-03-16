@@ -1,5 +1,5 @@
 import { StarOutlined } from "@ant-design/icons";
-import { ProgramTag } from "@components";
+import { Header, ProgramTag } from "@components";
 import { SignedInUserOnly, useSignedInUserOnly } from "@contexts";
 import { commonHooks } from "@hooks";
 import usePrograms from "@queries/usePrograms";
@@ -211,6 +211,7 @@ const IndexComponent = () => {
 const Index = () => {
   return (
     <SignedInUserOnly>
+      <Header />
       <IndexComponent />
     </SignedInUserOnly>
   );

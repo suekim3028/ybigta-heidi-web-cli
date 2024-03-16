@@ -14,6 +14,7 @@ import {
 import { useRouter } from "next/router";
 import ReserveInfo from "./components/ReserveInfo";
 import { STYLE_CONSTS } from "@constants";
+import { Header } from "@components";
 
 const { Text } = Typography;
 
@@ -153,6 +154,7 @@ const IndexComponent = () => {
 
 const Index = () => (
   <SignedInUserOnly>
+    <Header />
     <IndexComponent />
   </SignedInUserOnly>
 );
