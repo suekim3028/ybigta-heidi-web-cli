@@ -5,13 +5,12 @@ import { useRouter } from "next/router";
 const Index = () => {
   const router = useRouter();
   return (
-    <Flex vertical align="center">
+    <Flex vertical align="center" style={{ padding: "50px 0px" }} gap={20}>
       <Image
         preview={false}
-        width={250}
-        src={
-          "https://static.vecteezy.com/system/resources/thumbnails/011/883/296/small/modern-graphic-leaf-abstrack-with-water-drop-colorful-logo-good-for-technology-logo-fruits-logo-fresh-logo-nature-logo-company-logo-dummy-logo-bussiness-logo-vector.jpg"
-        }
+        width={200}
+        src={"/images/logo.png"}
+        style={{ borderRadius: "100%" }}
       />
       <Flex gap={12} vertical>
         <Space>
